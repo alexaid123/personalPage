@@ -1,5 +1,3 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { About } from "~/components/about";
 import { Banner } from "~/components/banner";
 import { Experience } from "~/components/experience";
 import { Footer } from "~/components/footer";

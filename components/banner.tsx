@@ -2,11 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
-
-
+import 'aos/dist/aos.css'; 
 
 export const Banner: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,11 +25,11 @@ export const Banner: React.FC = () => {
       
         <div className="relative container mx-auto text-center px-6 text-white">
           <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-8 animate__animated animate__fadeIn">
-            Hi, I'm <span className="text-primary">Alexandros Aidonis</span>
+            Hi, I&apos;m <span className="text-primary">Alexandros Aidonis</span>
           </h2>
 
           <p className="text-lg md:text-2xl mb-8 opacity-75 hover:opacity-100 transition-opacity duration-500 ease-in-out">
-            I'm a passionate software engineer with a love for coding, problem-solving, and building impactful applications. I specialize in creating responsive, user-friendly websites and scalable web applications using modern technologies like React, TypeScript, and Node.js.
+            I&apos;m a passionate software engineer with a love for coding, problem-solving, and building impactful applications. I specialize in creating responsive, user-friendly websites and scalable web applications using modern technologies like React, TypeScript, and Node.js.
           </p>
 
           <div className="mt-12">
