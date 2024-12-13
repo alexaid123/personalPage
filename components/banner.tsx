@@ -15,14 +15,13 @@ export const Banner: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState<string>('');
-  const [bannerVisible, setBannerVisible] = useState(true);  // Track if the banner should be visible
+  const [bannerVisible, setBannerVisible] = useState(true);  
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
   }, []);
 
   useEffect(() => {
-    // Hide the banner after a successful submission (3 seconds)
     if (submissionStatus === 'Your message has been sent successfully!') {
       setTimeout(() => {
         setBannerVisible(false);
@@ -30,7 +29,6 @@ export const Banner: React.FC = () => {
       }, 3000);
     }
 
-    // Hide the banner after a failure (5 seconds)
     if (submissionStatus === 'There was an error sending your message.') {
       setTimeout(() => {
         setBannerVisible(false);
@@ -43,7 +41,7 @@ export const Banner: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const closeModal = () => {
     setIsModalOpen(false);
     setFormData(
       {
@@ -89,8 +87,12 @@ export const Banner: React.FC = () => {
       } else {
         setSubmissionStatus('There was an error sending your message.');
       }
-    } catch (error: any) {
-      setSubmissionStatus('Error: ' + error.message);
+    }  catch (error: unknown) { 
+      if (error instanceof Error) { 
+        setSubmissionStatus('Error: ' + error.message);
+      } else {
+        setSubmissionStatus('An unknown error occurred');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -106,7 +108,6 @@ export const Banner: React.FC = () => {
 
   return (
     <>
-      {/* Banner */}
       {bannerVisible && submissionStatus && (
         <div className={`fixed top-0 left-0 w-full py-3 text-center text-white ${bannerClass} z-50`}>
           {submissionStatus}
