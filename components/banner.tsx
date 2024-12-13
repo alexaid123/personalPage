@@ -69,7 +69,7 @@ export const Banner: React.FC = () => {
       setIsSubmitting(false);
       return;
     }
-    
+
     setIsModalOpen(false);
 
     setFormData(
@@ -138,7 +138,7 @@ export const Banner: React.FC = () => {
       {isModalOpen && (
           <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 transition-all">
             <div className="bg-gray-800 p-12 rounded-3xl shadow-2xl transform transition-transform duration-500 scale-110 opacity-100 w-full max-w-4xl mx-auto">
-              <h3 className="text-3xl font-bold text-gradient-to-r from-purple-600 to-blue-500 mb-6 text-center">Contact Me</h3>
+              <h3 className="text-3xl font-bold text-white mb-6 text-center">Contact Me</h3>
               <form onSubmit={handleSubmit}>
                 <div className="mb-6">
                   <input

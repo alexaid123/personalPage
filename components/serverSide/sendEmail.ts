@@ -23,7 +23,7 @@ export async function sendEmail({ to, subject, message }: SendEmailParams): Prom
 
   const mailOptions = {
     from: process.env.GOOGLE_MAIL_APP_EMAIL,
-    to,
+    to: process.env.GOOGLE_MAIL_APP_EMAIL,
     subject,
     html: message,
   };
