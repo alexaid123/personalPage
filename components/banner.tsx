@@ -69,6 +69,7 @@ export const Banner: React.FC = () => {
       setIsSubmitting(false);
       return;
     }
+    
     setIsModalOpen(false);
 
     setFormData(
