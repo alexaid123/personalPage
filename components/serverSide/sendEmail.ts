@@ -9,7 +9,7 @@ type SendEmailParams = {
 };
 
 export async function sendEmail({ to, subject, message }: SendEmailParams): Promise<boolean> {
-  console.log('env is', process.env.GOOGLE_MAIL_APP_PASSWORD);
+  console.log('env is', to, process.env.GOOGLE_MAIL_APP_PASSWORD);
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
