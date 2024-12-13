@@ -6,13 +6,13 @@ import { Skills } from "~/components/skills";
 
 export default function Home() {
   return (
-    <section id="about" className="relative overflow-hidden py-32 bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900">
+    <section id="about" className="relative overflow-hidden py-32 bg-gradient-to-r from-green-800 via-green-600 to-green-500">
       <Banner />
-      <Skills /> 
-      <div className="mt-12">
+      <div className="mt-12 px-10">
         <Experience />
         <Projects />
       </div>
+      <Skills /> 
       <Footer />
     </section>
   );
