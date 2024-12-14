@@ -1,13 +1,11 @@
 import { Banner } from "~/components/banner";
 import { Experience } from "~/components/experience";
 import { Footer } from "~/components/footer";
-import Game from "~/components/game";
 import { Projects } from "~/components/projects";
 import { Skills } from "~/components/skills";
 
 export default function Home() {
   return (
-    // <Game></Game>
     <section
       id="about"
      className="relative flex flex-col min-h-screen overflow-hidden py-10 bg-gray-800 text-white"

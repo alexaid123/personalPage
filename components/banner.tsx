@@ -70,13 +70,11 @@ export const Banner: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Email validation logic
     if (name === 'email') {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       let progress = 0;
-      let newValidationState = { ...emailValidation };
+      const newValidationState = { ...emailValidation };
 
-      // Check if "@" exists
       if (value.includes('@')) {
         newValidationState.hasAtSymbol = true;
         progress += 25;
@@ -243,7 +241,7 @@ export const Banner: React.FC = () => {
                           disabled
                           className={`mr-2 ${emailValidation.hasAtSymbol ? 'bg-green-500' : 'bg-gray-300'} checked:bg-green-500`}
                         />
-                        Contains "@" symbol
+                        <span>Contains &quot;@&quot; symbol</span>
                       </li>
                       <li className="flex items-center">
                         <input
@@ -252,7 +250,7 @@ export const Banner: React.FC = () => {
                           disabled
                           className={`mr-2 ${emailValidation.hasDotAfterAt ? 'bg-green-500' : 'bg-gray-300'} checked:bg-green-500`}
                         />
-                        Contains a "." after "@"
+                        <span>Contains a &quot;.&quot; after &quot;@&quot;</span>
                       </li>
                       <li className="flex items-center">
                         <input

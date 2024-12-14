@@ -1,5 +1,3 @@
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-
 export const Skills: React.FC = () => {
     return (
         <div className="mx-auto max-w-4xl py-20">
