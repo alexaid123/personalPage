@@ -9,6 +9,36 @@ export default {
   ],
   theme: {
   	extend: {
+		animation: {
+			'laser-effect': 'laserRotate 5s linear infinite, laserColorChange 5s infinite',
+		  },
+		  keyframes: {
+			laserRotate: {
+			  '0%': {
+				transform: 'rotate(0deg)',
+			  },
+			  '100%': {
+				transform: 'rotate(360deg)',
+			  },
+			},
+			laserColorChange: {
+			  '0%': {
+				borderColor: '#FF3E00', // Red
+			  },
+			  '25%': {
+				borderColor: '#FFEA00', // Yellow
+			  },
+			  '50%': {
+				borderColor: '#00FF00', // Green
+			  },
+			  '75%': {
+				borderColor: '#00FFFF', // Cyan
+			  },
+			  '100%': {
+				borderColor: '#FF3E00', // Red
+			  },
+			},
+		  },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

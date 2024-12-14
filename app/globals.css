@@ -5,6 +5,17 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+@layer components {
+  .road {
+    perspective: 800px;
+    transform: rotateX(15deg);
+  }
+
+  .player {
+    transform-style: preserve-3d;
+    transition: transform 0.2s;
+  }
+}
 
 @layer base {
   :root {
