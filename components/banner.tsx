@@ -16,14 +16,14 @@ export const Banner: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState<string>('');
   const [bannerVisible, setBannerVisible] = useState(true);  
-  const [emailError, setEmailError] = useState<string | null>(null); // New state to track email validation
-  const [emailProgress, setEmailProgress] = useState(0); // Progress bar state
+  const [emailError, setEmailError] = useState<string | null>(null); 
+  const [emailProgress, setEmailProgress] = useState(0);
   const [emailValidation, setEmailValidation] = useState({
     hasAtSymbol: false,
     hasDotAfterAt: false,
     isLongEnough: false,
     isValidFormat: false
-  }); // To track individual email validation requirements
+  }); 
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: false });
@@ -56,8 +56,8 @@ export const Banner: React.FC = () => {
       message: "",
       email: ""
     });
-    setEmailError(null); // Clear email error when closing the modal
-    setEmailProgress(0); // Reset email progress when closing the modal
+    setEmailError(null); 
+    setEmailProgress(0); 
     setEmailValidation({
       hasAtSymbol: false,
       hasDotAfterAt: false,
@@ -82,7 +82,6 @@ export const Banner: React.FC = () => {
         newValidationState.hasAtSymbol = false;
       }
 
-      // Check if "." exists after "@"
       if (value.includes('.') && value.indexOf('@') < value.lastIndexOf('.')) {
         newValidationState.hasDotAfterAt = true;
         progress += 25;
@@ -90,7 +89,6 @@ export const Banner: React.FC = () => {
         newValidationState.hasDotAfterAt = false;
       }
 
-      // Check if the email length is sufficient
       if (value.length > 5) {
         newValidationState.isLongEnough = true;
         progress += 25;
@@ -98,7 +96,6 @@ export const Banner: React.FC = () => {
         newValidationState.isLongEnough = false;
       }
 
-      // Validate email format
       if (emailRegex.test(value)) {
         newValidationState.isValidFormat = true;
         progress += 25;
@@ -110,7 +107,7 @@ export const Banner: React.FC = () => {
       setEmailProgress(progress);
 
       if (progress === 100) {
-        setEmailError(null); // Reset error when email is valid
+        setEmailError(null); 
       } else {
         setEmailError('Please enter a valid email address.');
       }
@@ -173,13 +170,13 @@ export const Banner: React.FC = () => {
 
   return (
     <>
-      {bannerVisible && submissionStatus && (
+      {bannerVisible && submissionStatus && submissionStatus !== "All fields are required." && (
         <div className={`fixed top-0 left-0 w-full py-3 text-center text-white ${bannerClass} z-50`}>
           {submissionStatus}
         </div>
       )}
 
-      <div className="relative container mx-auto text-center px-6 text-white">
+      <div className="relative container mx-auto text-center px-6 mt-5 text-white">
         <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-8 animate__animated animate__fadeIn">
           Hi, I&apos;m <span className="text-primary">Alexandros Aidonis</span>
         </h2>
@@ -287,7 +284,7 @@ export const Banner: React.FC = () => {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  disabled={isSubmitting || !!emailError} // Disable button if there is an email error
+                  disabled={isSubmitting || !!emailError} 
                   onClick={handleSubmit}
                   className="bg-gradient-to-r from-pink-500 to-purple-600 p-4 rounded-full text-white shadow-xl hover:scale-105 hover:bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-500"
                 >
