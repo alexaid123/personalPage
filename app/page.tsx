@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <section
       id="about"
-     className="relative flex flex-col min-h-screen overflow-hidden py-10 bg-gray-800 text-white"
+     className="relative flex flex-col min-h-screen overflow-hidden py-10 bg-orange-400 text-white"
     >
       <div className="relative flex justify-center">
         <div className="relative inline-block">

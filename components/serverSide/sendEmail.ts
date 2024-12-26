@@ -4,13 +4,25 @@ import nodemailer from 'nodemailer';
 
 type SendEmailParams = {
   to: string;
-  subject: string;
+  name: string;
   message: string;
 };
 
-export async function sendEmail({ to, subject, message }: SendEmailParams): Promise<boolean> {
+export async function sendEmail({ to, name, message }: SendEmailParams): Promise<boolean> {
 
-  const emailBody = `Hi Alexandros, \n You have recieved a message from ${to} from your personal website. Here is the message ${message}`
+  const emailBody = `
+  <html>
+    <body>
+      <p>Hi Alexandros,</p>
+      <p>You have received a message from <strong>${name} (${to})</strong> from your personal website. Here is the message:</p>
+      <blockquote style="background-color: #f9f9f9; padding: 10px; border-left: 4px solid #007bff;">
+        ${message}
+      </blockquote>
+      <p>Best regards,</p>
+      <p>Your Amazing Self</p>
+    </body>
+  </html>
+`;
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -25,7 +37,7 @@ export async function sendEmail({ to, subject, message }: SendEmailParams): Prom
   const mailOptions = {
     from: process.env.GOOGLE_MAIL_APP_EMAIL,
     to: process.env.GOOGLE_MAIL_APP_EMAIL,
-    subject,
+    subject: "New Message From Your Website",
     html: emailBody,
   };
 

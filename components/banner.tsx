@@ -160,6 +160,18 @@ export const Banner: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = ""; 
+    }
+
+    return () => {
+      document.body.style.overflow = ""; 
+    };
+  }, [isModalOpen]);
+
   const bannerClass = submissionStatus === 'Sending...' 
     ? 'bg-yellow-400' 
     : submissionStatus === 'Your message has been sent successfully!' 
@@ -197,113 +209,129 @@ export const Banner: React.FC = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 transition-all">
-          <div className="bg-gray-800 p-12 rounded-3xl shadow-2xl transform transition-transform duration-500 scale-110 opacity-100 w-full max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-6 text-center">Contact Me</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-6">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full p-4 px-30 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
-              <div className="mb-6 relative">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={`w-full p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 ${emailError ? 'border-2 border-red-500' : ''}`}
-                />
-                {emailError && (
-                  <>
-                    <p className="absolute text-red-500 text-sm mt-1">{emailError}</p>
-                  
-                    <div className="w-full mt-7 h-2 bg-gray-600 rounded-full">
-                      <div
-                        className="h-full bg-green-500 rounded-full"
-                        style={{ width: `${emailProgress}%` }}
+      <div
+        className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 transition-all"
+        onClick={closeModal} 
+      >
+        <div
+          className="bg-gray-800 p-12 rounded-3xl shadow-2xl transform transition-transform duration-500 scale-110 opacity-100 w-full max-w-4xl mx-auto"
+          onClick={(e) => e.stopPropagation()} 
+        >
+          <h3 className="text-3xl font-bold text-white mb-6 text-center">Contact Me</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-6">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="w-full p-4 px-30 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            <div className="mb-6 relative">
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className={`w-full p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                  emailError ? "border-2 border-red-500" : ""
+                }`}
+              />
+              {emailError && (
+                <>
+                  <p className="absolute text-red-500 text-sm mt-1">{emailError}</p>
+
+                  <div className="w-full mt-7 h-2 bg-gray-600 rounded-full">
+                    <div
+                      className="h-full bg-green-500 rounded-full"
+                      style={{ width: `${emailProgress}%` }}
+                    />
+                  </div>
+                  <ul className="mt-4 space-y-2 text-left text-white">
+                    <li className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={emailValidation.hasAtSymbol}
+                        disabled
+                        className={`mr-2 ${
+                          emailValidation.hasAtSymbol ? "bg-green-500" : "bg-gray-300"
+                        } checked:bg-green-500`}
                       />
-                    </div>
-                    <ul className="mt-4 space-y-2 text-left text-white">
-                      <li className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={emailValidation.hasAtSymbol}
-                          disabled
-                          className={`mr-2 ${emailValidation.hasAtSymbol ? 'bg-green-500' : 'bg-gray-300'} checked:bg-green-500`}
-                        />
-                        <span>Contains &quot;@&quot; symbol</span>
-                      </li>
-                      <li className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={emailValidation.hasDotAfterAt}
-                          disabled
-                          className={`mr-2 ${emailValidation.hasDotAfterAt ? 'bg-green-500' : 'bg-gray-300'} checked:bg-green-500`}
-                        />
-                        <span>Contains a &quot;.&quot; after &quot;@&quot;</span>
-                      </li>
-                      <li className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={emailValidation.isLongEnough}
-                          disabled
-                          className={`mr-2 ${emailValidation.isLongEnough ? 'bg-green-500' : 'bg-gray-300'} checked:bg-green-500`}
-                        />
-                        Minimum 6 characters
-                      </li>
-                      <li className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={emailValidation.isValidFormat}
-                          disabled
-                          className={`mr-2 ${emailValidation.isValidFormat ? 'bg-green-500' : 'bg-gray-300'} checked:bg-green-500`}
-                        />
-                        Valid email format
-                      </li>
-                    </ul>
-                  </>
-                )}
-              </div>
-              <div className="mb-6">
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="w-full p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  rows={5}
-                />
-              </div>
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  disabled={isSubmitting || !!emailError} 
-                  onClick={handleSubmit}
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 p-4 rounded-full text-white shadow-xl hover:scale-105 hover:bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-500"
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
-              </div>
-            </form>
-            {submissionStatus && (
-              <p className="text-center text-white mt-4">{submissionStatus}</p>
-            )}
-            <button
-              className="absolute top-0 right-0 p-4 text-white text-2xl hover:text-gray-300 transition-all"
-              onClick={closeModal}
-            >
-              ×
-            </button>
-          </div>
+                      <span>Contains "&quot;@" symbol</span>
+                    </li>
+                    <li className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={emailValidation.hasDotAfterAt}
+                        disabled
+                        className={`mr-2 ${
+                          emailValidation.hasDotAfterAt ? "bg-green-500" : "bg-gray-300"
+                        } checked:bg-green-500`}
+                      />
+                      <span>Contains a "&quot;." after "&quot;@"</span>
+                    </li>
+                    <li className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={emailValidation.isLongEnough}
+                        disabled
+                        className={`mr-2 ${
+                          emailValidation.isLongEnough ? "bg-green-500" : "bg-gray-300"
+                        } checked:bg-green-500`}
+                      />
+                      Minimum 6 characters
+                    </li>
+                    <li className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={emailValidation.isValidFormat}
+                        disabled
+                        className={`mr-2 ${
+                          emailValidation.isValidFormat ? "bg-green-500" : "bg-gray-300"
+                        } checked:bg-green-500`}
+                      />
+                      Valid email format
+                    </li>
+                  </ul>
+                </>
+              )}
+            </div>
+            <div className="mb-6">
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleInputChange}
+                className="w-full p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                rows={5}
+              />
+            </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                disabled={isSubmitting || !!emailError}
+                onClick={handleSubmit}
+                className="bg-gradient-to-r from-pink-500 to-purple-600 p-4 rounded-full text-white shadow-xl hover:scale-105 hover:bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-500"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+            </div>
+          </form>
+          {submissionStatus && (
+            <p className="text-center text-white mt-4">{submissionStatus}</p>
+          )}
+          <button
+            className="absolute top-0 right-0 p-4 text-white text-2xl hover:text-gray-300 transition-all"
+            onClick={closeModal}
+          >
+            ×
+          </button>
         </div>
-      )}
+      </div>
+    )}
     </>
   );
 };
