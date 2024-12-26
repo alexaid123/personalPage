@@ -260,7 +260,7 @@ export const Banner: React.FC = () => {
                           emailValidation.hasAtSymbol ? "bg-green-500" : "bg-gray-300"
                         } checked:bg-green-500`}
                       />
-                      <span>Contains "&quot;@" symbol</span>
+                      <span>Contains &quot;@ symbol</span>
                     </li>
                     <li className="flex items-center">
                       <input
@@ -271,7 +271,7 @@ export const Banner: React.FC = () => {
                           emailValidation.hasDotAfterAt ? "bg-green-500" : "bg-gray-300"
                         } checked:bg-green-500`}
                       />
-                      <span>Contains a "&quot;." after "&quot;@"</span>
+                      <span>Contains a &quot;. after &quot;@</span>
                     </li>
                     <li className="flex items-center">
                       <input

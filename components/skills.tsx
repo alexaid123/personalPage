@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { ReactNode } from "react";
 import LockIcon from '@mui/icons-material/Lock';
-import AOS from "aos"; 
 import "aos/dist/aos.css"; 
 
 interface Skill {
