@@ -210,7 +210,7 @@ export const Banner: React.FC = () => {
 
       {isModalOpen && (
       <div
-        className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 transition-all"
+        className="fixed inset-0 flex justify-center items-center p-10 bg-black bg-opacity-70 z-50 transition-all"
         onClick={closeModal} 
       >
         <div

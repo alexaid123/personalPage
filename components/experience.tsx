@@ -104,7 +104,6 @@ export const Experience: React.FC = () => {
     setSelectedExperience(null);
   };
 
-  // Disable background scrolling when modal is open
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -117,7 +116,7 @@ export const Experience: React.FC = () => {
     <>
       {isModalOpen && selectedExperience && (
         <div
-          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50"
+          className="fixed inset-0 flex p-7 justify-center items-center bg-black bg-opacity-70 z-50"
           onClick={closeModal}
         >
           <div
